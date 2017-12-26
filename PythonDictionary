@@ -1,0 +1,23 @@
+import json
+import difflib
+
+def dictionary(word):
+    if word.lower() in data:
+        return data[word.lower()]
+    else:
+        matches = difflib.get_close_matches(word.lower(), data)
+        if not matches:
+            return "That word is not in the dictionary"
+        else:
+            answer = (input("Did you mean "+ matches[0]+"? [y/n]"))
+
+            if answer == "y":
+                return data[matches[0]]
+
+            else:
+                return "That word is not in the dictionary"
+
+data = json.load(open("data.json"))
+print(data["rain"])
+
+print(dictionary(input("Please enter a word:\n")))
